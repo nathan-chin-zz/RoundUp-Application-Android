@@ -22,7 +22,7 @@
         android:id="@+id/input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Event Description (ex: time, place, etc.)" />
+        android:hint="Event Description (ex: activity, place, etc.)" />
 
     <Button
         android:layout_width="wrap_content"

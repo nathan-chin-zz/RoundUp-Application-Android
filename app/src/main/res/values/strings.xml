@@ -6,6 +6,54 @@
     <string name="error_description">Enter an event description to continue</string>
     <string name="highlight">Select the possible days you would like to have the event on</string>
     <string name="error_name_and_description">Enter an event name and description to continue</string>
-    <string name="unique_code">%d</string>
+    <string name="unique_code">%s</string>
     <string name="no_back">Please highlight the days you are available to meet</string>
+    <string name="time_range">Time Range: </string>
+    <string name="start_hour">Starting Hour: </string>
+    <string name="end_hour">Ending Hour: </string>
+    <string name="example_hour">8</string>
+    <string name="update">Update</string>
+    <string name="numberSelectedDays">%d</string>
+    <string name="update_list">%s</string>
+
+    <string-array name="hour_first">
+        <item>12</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+    </string-array>
+
+    <string-array name="hour_second">
+        <item>12</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+    </string-array>
+    
+    <string-array name="time_of_day_first">
+        <item>AM</item>
+        <item>PM</item>
+    </string-array>
+
+    <string-array name="time_of_day_second">
+        <item>PM</item>
+        <item>AM</item>
+    </string-array>
 </resources>
+
