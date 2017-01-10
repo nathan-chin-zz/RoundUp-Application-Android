@@ -1,3 +1,11 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">RoundUp</string>
+    <string name="title_activity_splash_screen">Splash Screen</string>
+    <string name="description">Description<xliff:g id="write" example="Amy">%s</xliff:g></string>
+    <string name="error_name">Enter an event name to continue</string>
+    <string name="error_description">Enter an event description to continue</string>
+    <string name="highlight">Select the possible days you would like to have the event on</string>
+    <string name="error_name_and_description">Enter an event name and description to continue</string>
+    <string name="unique_code">%d</string>
+    <string name="no_back">Please highlight the days you are available to meet</string>
 </resources>
