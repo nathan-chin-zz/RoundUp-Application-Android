@@ -1,46 +1,47 @@
-package com.example.android.roundup;
+package com.example.vikasperaka.roundupv4;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+
+import static com.example.vikasperaka.roundupv4.R.id.results;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Button create;
+    private Button join;
+    private Button result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button description = (Button) findViewById(R.id.next);
-        description.setOnClickListener(new View.OnClickListener() {
-            // The code in this method will be executed when the numbers View is clicked on.
+        create = (Button)findViewById(R.id.createRoundUp);
+        join = (Button)findViewById(R.id.joinRoundUp);
+        result = (Button)findViewById(results);
+
+        //options to create, join, and see results
+        create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                EditText name = (EditText) findViewById(R.id.name);
-                String inputName = name.getText().toString();
-                EditText description = (EditText) findViewById(R.id.input);
-                String inputDesc = description.getText().toString();
-                if((inputName.length() == 0) && (inputDesc.length() == 0)){
-                    Toast.makeText(getApplicationContext(), R.string.error_name_and_description, Toast.LENGTH_SHORT).show();
-                }
-                else if(inputName.length() == 0){
-                    Toast.makeText(getApplicationContext(), R.string.error_name, Toast.LENGTH_SHORT).show();
-                }
-                else if(inputDesc.length() == 0){
-                    Toast.makeText(getApplicationContext(), R.string.error_description, Toast.LENGTH_SHORT).show();
-                }
-                RoundUpCalendar make = new RoundUpCalendar(inputName, inputDesc);
-                final String stri = inputDesc;
-                if((inputName.length() != 0) && (inputDesc.length() != 0)) {
-                    Intent nextIntent = new Intent(MainActivity.this, CalendarScreen.class);
-                    nextIntent.putExtra("description", stri);
-                    nextIntent.putExtra("RoundUp", make);
-                    startActivity(nextIntent);
-                }
+                startActivity(new Intent(getApplicationContext(), CreateEvent.class));
+            }
+        });
+
+        join.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), JoinEvent.class));
+            }
+        });
+
+        result.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), Results.class));
             }
         });
     }
