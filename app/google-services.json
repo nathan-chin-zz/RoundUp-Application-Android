@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "129132743635",
+    "firebase_url": "https://roundupv4.firebaseio.com",
+    "project_id": "roundupv4",
+    "storage_bucket": "roundupv4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129132743635:android:9e22a6688fed6ca5",
+        "android_client_info": {
+          "package_name": "com.example.vikasperaka.roundupv4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "129132743635-dpp688va7usq7hd2fekvm4bp7cp3ouh3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuDtdetfyvQOE2YDFxDOHtahcVXB3mOKI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
