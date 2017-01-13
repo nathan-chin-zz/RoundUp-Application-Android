@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.android.roundupv4.R;
-
 public class Splash extends AppCompatActivity {
 
     /** Duration of wait **/

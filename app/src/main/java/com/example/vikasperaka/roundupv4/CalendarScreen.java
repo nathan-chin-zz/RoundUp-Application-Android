@@ -9,8 +9,6 @@ import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.roundupv4.R;
-
 import java.util.ArrayList;
 
 /**

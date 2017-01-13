@@ -6,8 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.android.roundupv4.R;
-
 public class MainActivity extends AppCompatActivity {
 
     private Button create;
@@ -34,14 +32,14 @@ public class MainActivity extends AppCompatActivity {
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), com.example.vikasperaka.roundupv4.JoinEvent.class));
+                startActivity(new Intent(getApplicationContext(), JoinEvent.class));
             }
         });
 
         result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), com.example.vikasperaka.roundupv4.Results.class));
+                startActivity(new Intent(getApplicationContext(), Results.class));
             }
         });
     }
