@@ -1,12 +1,14 @@
 package com.example.vikasperaka.roundupv4;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import static com.example.vikasperaka.roundupv4.R.id.results;
+import com.example.android.roundupv4.R;
+
+import static com.example.android.roundupv4.R.id.results;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,21 +29,21 @@ public class MainActivity extends AppCompatActivity {
         create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), CreateEvent.class));
+                startActivity(new Intent(getApplicationContext(), com.example.vikasperaka.roundupv4.CreateEvent.class));
             }
         });
 
         join.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), JoinEvent.class));
+                startActivity(new Intent(getApplicationContext(), com.example.vikasperaka.roundupv4.JoinEvent.class));
             }
         });
 
         result.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), Results.class));
+                startActivity(new Intent(getApplicationContext(), com.example.vikasperaka.roundupv4.Results.class));
             }
         });
     }

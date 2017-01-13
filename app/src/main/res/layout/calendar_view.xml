@@ -34,7 +34,7 @@
             android:layout_height="300dp"
             android:gravity="center"
             android:verticalSpacing="10dp"
-            tools:context="com.example.android.roundup.CalendarScreen">
+            tools:context="com.example.android.roundupv4.CalendarScreen">
         </GridView>
 
         <!--<CalendarView
