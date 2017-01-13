@@ -30,7 +30,7 @@ public class CalendarScreen extends AppCompatActivity{
         message.setText(description);
         RoundUpCalendar make = (RoundUpCalendar)intent.getSerializableExtra("RoundUp");
         TextView unique = (TextView) findViewById(R.id.code);
-        unique.setText(make.getUniqueCode());
+        //unique.setText(make.getUniqueCode());
 
         ArrayList<Dates> dates = new ArrayList<>();
         dates.add(new Dates(1));

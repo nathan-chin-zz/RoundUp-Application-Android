@@ -23,6 +23,7 @@
             <activity android:name=".Confirmation" />
             <activity android:name=".CreateCalendar" />
             <activity android:name=".CodeCreate" />
+            <activity android:name=".CalendarScreen"/>
         </application>
 
 </manifest>

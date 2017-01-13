@@ -21,7 +21,7 @@ public class RoundUpCalendar implements Serializable{
     final int CODE_LENGTH = 5;
 
     public RoundUpCalendar(){
-
+        uniqueCode = generateCode();
     }
 
     public RoundUpCalendar(String eventName, String eventDescription, ArrayList<ArrayList<Integer>> test){
