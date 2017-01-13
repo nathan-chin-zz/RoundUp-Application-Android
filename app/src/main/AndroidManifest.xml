@@ -8,18 +8,18 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name="com.example.vikasperaka.roundupv4.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.android.com.example.vikasperaka.roundupv4.Splash">
+        <activity android:name="com.example.vikasperaka.roundupv4.Splash">
 
         </activity>
         <activity
-            android:name="com.example.android.com.example.vikasperaka.roundupv4.CalendarScreen"
+            android:name="com.example.vikasperaka.roundupv4.CalendarScreen"
             android:label="Calendar">
         </activity>
     </application>

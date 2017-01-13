@@ -8,8 +8,6 @@ import android.widget.Button;
 
 import com.example.android.roundupv4.R;
 
-import static com.example.android.roundupv4.R.id.results;
-
 public class MainActivity extends AppCompatActivity {
 
     private Button create;
@@ -23,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         create = (Button)findViewById(R.id.createRoundUp);
         join = (Button)findViewById(R.id.joinRoundUp);
-        result = (Button)findViewById(results);
+        result = (Button)findViewById(R.id.results);
 
         //options to create, join, and see results
         create.setOnClickListener(new View.OnClickListener() {
