@@ -2,10 +2,7 @@
     <string name="app_name">RoundUp</string>
     <string name="title_activity_splash_screen">Splash Screen</string>
     <string name="description">Description<xliff:g id="write" example="Amy">%s</xliff:g></string>
-    <string name="error_name">Enter an event name to continue</string>
-    <string name="error_description">Enter an event description to continue</string>
     <string name="highlight">Select the possible days you would like to have the event on</string>
-    <string name="error_name_and_description">Enter an event name and description to continue</string>
     <string name="unique_code">%s</string>
     <string name="no_back">Please highlight the days you are available to meet</string>
     <string name="time_range">Time Range: </string>
@@ -21,6 +18,14 @@
     <string name="join_roundup">Join RoundUp</string>
     <string name="results">Results</string>
     <string name="help">Help</string>
+
+    <!--For CreateEvent-->
+    <string name="name_event">Name of Event</string>
+    <string name="description_event">Event Description (ex: activity, place, etc.)</string>
+    <string name="roundup_button">RoundUp!!</string>
+    <string name="error_name">Enter an event name to continue</string>
+    <string name="error_description">Enter an event description to continue</string>
+    <string name="error_name_and_description">Enter an event name and description to continue</string>
 
     <string-array name="hour_first">
         <item>12</item>

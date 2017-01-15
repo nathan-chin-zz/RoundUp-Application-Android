@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -19,7 +21,8 @@ public class CreateCalendar extends AppCompatActivity {
     private DatabaseReference root;
     private String tempKey;
     private ArrayList<ArrayList<Integer>> test;
-    private int numDays = 0;
+
+    int numDays = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,7 @@ public class CreateCalendar extends AppCompatActivity {
         subRoot.updateChildren(map2);
 
         setTitle("Event: " + name);
+
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -70,5 +74,58 @@ public class CreateCalendar extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        Intent intent = getIntent();
+        String description_edit = intent.getStringExtra("description");
+        TextView message = (TextView) findViewById(R.id.write);
+        message.setText(description_edit);
+        TextView unique = (TextView) findViewById(R.id.code);
+        unique.setText(roundUpCalendar.getUniqueCode());
+
+
+        Month first = new Month();
+        ArrayList<Dates> dates = first.getDays();
+        Month second = new Month(1);
+        ArrayList<Dates> dates2 = second.getDays();
+        Month third = new Month(2);
+        ArrayList<Dates> dates3 = third.getDays();
+
+        for(int k = 0; k < dates2.size(); k++){
+            dates.add(dates2.get(k));
+        }
+        for(int j = 0; j < dates3.size(); j++){
+            dates.add(dates3.get(j));
+        }
+
+
+
+
+        final ArrayList<Dates> copy = dates;
+
+        final CalendarAdapter adapter = new CalendarAdapter(this, dates);
+        GridView gridView = (GridView) findViewById(R.id.calendar);
+        gridView.setAdapter(adapter);
+
+        Button update = (Button) findViewById(R.id.update);
+        update.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                ArrayList<Integer> selected = new ArrayList<>();
+                numDays = 0;
+                selected.clear();
+                TextView num = (TextView) findViewById(R.id.num_selected_days);
+                TextView sel = (TextView) findViewById(R.id.selected_days);
+                for(int k = 0; k < copy.size(); k++){
+                    if(copy.get(k).isClicked() == true){
+                        numDays = numDays + 1;
+                        selected.add(copy.get(k).getDay());
+                        //numDays = adapter.getNumDays();
+                    }
+                }
+                num.setText("" + numDays);
+                sel.setText("" + selected);
+            }
+        });
+
     }
 }

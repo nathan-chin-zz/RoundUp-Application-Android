@@ -1,18 +1,21 @@
 package com.example.vikasperaka.roundupv4;
 
+import android.support.v7.app.AppCompatActivity;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by vikasperaka on 1/9/17.
+ * Created by vikasperaka on 1/9/17 and edited by Nathan Chin on 1/14/17.
  */
 
-public class RoundUpCalendar implements Serializable{
+public class RoundUpCalendar extends AppCompatActivity implements Serializable{
 
     private String eventName;
     private String eventDescription;
     private String uniqueCode;
     private ArrayList<ArrayList<Integer>> test;
+    private int numClicked;
 
     final char[] ALPHABET = {'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q',
             'r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0','A',
@@ -29,6 +32,7 @@ public class RoundUpCalendar implements Serializable{
         this.eventDescription = eventDescription;
         uniqueCode = generateCode();
         this.test = test;
+        numClicked = 0;
     }
 
     public String generateCode(){
@@ -54,5 +58,13 @@ public class RoundUpCalendar implements Serializable{
     }
 
     public ArrayList<ArrayList<Integer>> getCal(){ return test; }
+
+    public int getNumClicked(){
+        return numClicked;
+    }
+
+    public void increment(){
+        numClicked++;
+    }
 }
 
