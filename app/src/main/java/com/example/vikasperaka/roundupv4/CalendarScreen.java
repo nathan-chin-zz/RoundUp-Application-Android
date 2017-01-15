@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+
 /**
  * Created by Nathan on 1/9/2017.
  */
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 public class CalendarScreen extends AppCompatActivity{
 
     int numDays = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,45 +34,34 @@ public class CalendarScreen extends AppCompatActivity{
         TextView unique = (TextView) findViewById(R.id.code);
         //unique.setText(make.getUniqueCode());
 
-        ArrayList<Dates> dates = new ArrayList<>();
-        dates.add(new Dates(1));
-        dates.add(new Dates(2));
-        dates.add(new Dates(3));
-        dates.add(new Dates(4));
-        dates.add(new Dates(5));
-        dates.add(new Dates(6));
-        dates.add(new Dates(7));
-        dates.add(new Dates(8));
-        dates.add(new Dates(9));
-        dates.add(new Dates(10));
-        dates.add(new Dates(11));
-        dates.add(new Dates(12));
-        dates.add(new Dates(13));
-        dates.add(new Dates(14));
-        dates.add(new Dates(15));
-        dates.add(new Dates(16));
-        dates.add(new Dates(17));
-        dates.add(new Dates(18));
-        dates.add(new Dates(19));
-        dates.add(new Dates(20));
-        dates.add(new Dates(21));
-        dates.add(new Dates(22));
-        dates.add(new Dates(23));
-        dates.add(new Dates(24));
-        dates.add(new Dates(25));
-        dates.add(new Dates(26));
-        dates.add(new Dates(27));
-        dates.add(new Dates(28));
-        dates.add(new Dates(29));
-        dates.add(new Dates(30));
-        dates.add(new Dates(31));
-        final ArrayList<Dates> copy = dates;
+        /*Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat mdformat = new SimpleDateFormat("M/d/yyyy");
+        String strDate = "Current Date : " + mdformat.format(calendar.getTime());
+        TextView view = (TextView) findViewById(R.id.date);
+        view.setText(strDate);*/
 
-        final ArrayList<Integer> selected = new ArrayList<>();
+        Month first = new Month();
+        ArrayList<Dates> dates = first.getDays();
+        Month second = new Month(1);
+        ArrayList<Dates> dates2 = second.getDays();
+        Month third = new Month(2);
+        ArrayList<Dates> dates3 = third.getDays();
+
+        for(int k = 0; k < dates2.size(); k++){
+            dates.add(dates2.get(k));
+        }
+        for(int j = 0; j < dates3.size(); j++){
+            dates.add(dates3.get(j));
+        }
+
+
+        final ArrayList<Dates> copy = dates;
 
         final CalendarAdapter adapter = new CalendarAdapter(this, dates);
         GridView gridView = (GridView) findViewById(R.id.calendar);
         gridView.setAdapter(adapter);
+
+        final ArrayList<Integer> selected = new ArrayList<>();
 
         Button update = (Button) findViewById(R.id.update);
         update.setOnClickListener(new View.OnClickListener(){
@@ -91,8 +82,6 @@ public class CalendarScreen extends AppCompatActivity{
                 sel.setText("" + selected);
             }
         });
-
-
     }
 
     @Override
@@ -100,9 +89,5 @@ public class CalendarScreen extends AppCompatActivity{
         //super.onBackPressed();
         Toast.makeText(this, R.string.no_back, Toast.LENGTH_SHORT).show();
     }
-
-
-
-
 
 }

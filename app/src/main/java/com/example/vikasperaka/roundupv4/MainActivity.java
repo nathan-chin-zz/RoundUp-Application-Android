@@ -17,9 +17,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        create = (Button)findViewById(R.id.createRoundUp);
-        join = (Button)findViewById(R.id.joinRoundUp);
-        result = (Button)findViewById(R.id.results);
+        create = (Button)findViewById(R.id.createRoundUp_button);
+        join = (Button)findViewById(R.id.joinRoundUp_button);
+        result = (Button)findViewById(R.id.results_button);
 
         //options to create, join, and see results
         create.setOnClickListener(new View.OnClickListener() {

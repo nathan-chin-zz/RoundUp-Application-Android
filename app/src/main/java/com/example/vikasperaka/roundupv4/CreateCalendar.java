@@ -19,6 +19,7 @@ public class CreateCalendar extends AppCompatActivity {
     private DatabaseReference root;
     private String tempKey;
     private ArrayList<ArrayList<Integer>> test;
+    private int numDays = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

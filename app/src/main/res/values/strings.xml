@@ -16,6 +16,12 @@
     <string name="numberSelectedDays">%d</string>
     <string name="update_list">%s</string>
 
+    <!--For MainActivity-->
+    <string name="create_roundup">Create RoundUp</string>
+    <string name="join_roundup">Join RoundUp</string>
+    <string name="results">Results</string>
+    <string name="help">Help</string>
+
     <string-array name="hour_first">
         <item>12</item>
         <item>1</item>

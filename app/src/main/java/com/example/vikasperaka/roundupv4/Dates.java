@@ -1,5 +1,6 @@
 package com.example.vikasperaka.roundupv4;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -15,6 +16,12 @@ public class Dates extends AppCompatActivity{
     private ArrayList<String> hours;
     private boolean isSelected;
     private int day;
+    private int fontColor;
+    private int month;
+
+    final int colorBlack = Color.BLACK;
+    final int colorClear = Color.TRANSPARENT;
+    final int colorDKGray = Color.DKGRAY;
 
     final int[] HOURS = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23};
     final String HALF = ":30";
@@ -24,17 +31,43 @@ public class Dates extends AppCompatActivity{
 
     public Dates(){
         isSelected = false;
+        fontColor = colorDKGray;
+        day = 0;
+        if(day == 0){
+            makeEmptyView();
+        }
+        this.month = month;
     }
 
-    public Dates(int day){
+    public Dates(int month){
+        isSelected = false;
+        fontColor = colorDKGray;
+        day = 0;
+        if(day == 0){
+            makeEmptyView();
+        }
+        this.month = month;
+    }
+
+    public Dates(int day, int month){
         isSelected = false;
         this.day = day;
+        fontColor = colorDKGray;
+        if(this.day == 0){
+            makeEmptyView();
+        }
+        this.month = month;
     }
 
-    public Dates(int startHour, int endHour, ArrayList<String> hours){
+    public Dates(int month, int startHour, int endHour, ArrayList<String> hours){
         this.startHour = startHour;
         this.endHour = endHour;
         this.hours = hours;
+        fontColor = colorDKGray;
+        if(this.day == 0){
+            makeEmptyView();
+        }
+        this.month = month;
     }
 
     public void setDay(int day){
@@ -43,6 +76,14 @@ public class Dates extends AppCompatActivity{
 
     public int getDay(){
         return day;
+    }
+
+    public int getFontColor(){
+        return fontColor;
+    }
+
+    public int getMonth(){
+        return month;
     }
 
     public boolean isClicked(){
@@ -155,6 +196,10 @@ public class Dates extends AppCompatActivity{
                 break;
         }
         return time;
+    }
+
+    public void makeEmptyView() {
+        fontColor = colorClear;
     }
 
 }

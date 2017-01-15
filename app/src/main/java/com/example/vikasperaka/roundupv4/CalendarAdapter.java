@@ -3,13 +3,18 @@ package com.example.vikasperaka.roundupv4;
 import android.app.Activity;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 /**
  * Created by Nathan on 1/10/2017.
@@ -26,6 +31,15 @@ public class CalendarAdapter extends ArrayAdapter<Dates>{
     public int getNumDays(){
         return numDays;
     }
+
+    Calendar calendar = Calendar.getInstance();
+    SimpleDateFormat theDay = new SimpleDateFormat("d", Locale.US);
+    String strDay = theDay.format(calendar.getTime());
+    int currentDay = Integer.parseInt(strDay);
+
+    SimpleDateFormat theMonth = new SimpleDateFormat("M", Locale.US);
+    String strMonth = theMonth.format(calendar.getTime());
+    int currentMonth = Integer.parseInt(strMonth);
 
     @NonNull
     @Override
@@ -44,27 +58,37 @@ public class CalendarAdapter extends ArrayAdapter<Dates>{
         TextView date = (TextView) gridItemView.findViewById(R.id.number);
         // Get the version name from the current AndroidFlavor object and
         // set this text on the name TextView
+
         date.setText("" + currentDate.getDay());
+        date.setTextColor(currentDate.getFontColor());
 
         if(currentDate.isClicked() == false){
-            date.setBackgroundColor(Color.MAGENTA);
+            date.setBackgroundColor(Color.LTGRAY);
         }
         else{
             date.setBackgroundColor(Color.CYAN);
         }
 
+        if((currentDate.getDay() == currentDay) && (currentDate.getMonth() == currentMonth)){
+            SpannableString content = new SpannableString("" + currentDay);
+            content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+            date.setText(content);
+        }
 
         gridItemView.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 TextView hi = (TextView) v.findViewById(R.id.number);
                 currentDate.clickTheDay();
-                if(currentDate.isClicked() == true){
+                if(currentDate.getFontColor() == Color.TRANSPARENT){
+                    currentDate.clickTheDay();
+                }
+                else if(currentDate.isClicked() == true && currentDate.getFontColor() != Color.TRANSPARENT){
                     hi.setBackgroundColor(Color.CYAN);
                     numDays = numDays + 1;
                 }
-                else {
-                    hi.setBackgroundColor(Color.MAGENTA);
+                else if(currentDate.isClicked() == false && currentDate.getFontColor() != Color.TRANSPARENT){
+                    hi.setBackgroundColor(Color.LTGRAY);
                     numDays = numDays - 1;
                 }
             }
