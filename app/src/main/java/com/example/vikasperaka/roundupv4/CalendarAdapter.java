@@ -41,6 +41,7 @@ public class CalendarAdapter extends ArrayAdapter<Dates>{
     String strMonth = theMonth.format(calendar.getTime());
     int currentMonth = Integer.parseInt(strMonth);
 
+
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -51,13 +52,11 @@ public class CalendarAdapter extends ArrayAdapter<Dates>{
                     R.layout.list_item, parent, false);
         }
 
-        // Get the {@link AndroidFlavor} object located at this position in the list
+        // Get the object located at this position in the list
         final Dates currentDate = getItem(position);
 
         // Find the TextView in the list_item.xml layout with the ID version_name
         TextView date = (TextView) gridItemView.findViewById(R.id.number);
-        // Get the version name from the current AndroidFlavor object and
-        // set this text on the name TextView
 
         date.setText("" + currentDate.getDay());
         date.setTextColor(currentDate.getFontColor());
@@ -79,11 +78,14 @@ public class CalendarAdapter extends ArrayAdapter<Dates>{
             @Override
             public void onClick(View v){
                 TextView hi = (TextView) v.findViewById(R.id.number);
-                currentDate.clickTheDay();
+                if(currentDate.getFontColor() != Color.TRANSPARENT){
+                    currentDate.clickTheDay();
+                }
+                /*currentDate.clickTheDay();
                 if(currentDate.getFontColor() == Color.TRANSPARENT){
                     currentDate.clickTheDay();
                 }
-                else if(currentDate.isClicked() == true && currentDate.getFontColor() != Color.TRANSPARENT){
+                else*/ if(currentDate.isClicked() == true && currentDate.getFontColor() != Color.TRANSPARENT){
                     hi.setBackgroundColor(Color.CYAN);
                     numDays = numDays + 1;
                 }
@@ -91,6 +93,7 @@ public class CalendarAdapter extends ArrayAdapter<Dates>{
                     hi.setBackgroundColor(Color.LTGRAY);
                     numDays = numDays - 1;
                 }
+
             }
         });
 

@@ -79,8 +79,8 @@ public class CreateCalendar extends AppCompatActivity {
         String description_edit = intent.getStringExtra("description");
         TextView message = (TextView) findViewById(R.id.write);
         message.setText(description_edit);
-        TextView unique = (TextView) findViewById(R.id.code);
-        unique.setText(roundUpCalendar.getUniqueCode());
+        /*TextView unique = (TextView) findViewById(R.id.code);
+        unique.setText(roundUpCalendar.getUniqueCode());*/
 
 
         Month first = new Month();
@@ -89,6 +89,9 @@ public class CreateCalendar extends AppCompatActivity {
         ArrayList<Dates> dates2 = second.getDays();
         Month third = new Month(2);
         ArrayList<Dates> dates3 = third.getDays();
+
+        TextView months = (TextView) findViewById(R.id.display_months);
+        months.setText(first.getMonthName() + " - " + second.getMonthName() + " - " + third.getMonthName());
 
         for(int k = 0; k < dates2.size(); k++){
             dates.add(dates2.get(k));
@@ -103,14 +106,16 @@ public class CreateCalendar extends AppCompatActivity {
         final ArrayList<Dates> copy = dates;
 
         final CalendarAdapter adapter = new CalendarAdapter(this, dates);
-        GridView gridView = (GridView) findViewById(R.id.calendar);
+        final GridView gridView = (GridView) findViewById(R.id.calendar);
         gridView.setAdapter(adapter);
+
+
 
         Button update = (Button) findViewById(R.id.update);
         update.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                ArrayList<Integer> selected = new ArrayList<>();
+                ArrayList<String> selected = new ArrayList<>();
                 numDays = 0;
                 selected.clear();
                 TextView num = (TextView) findViewById(R.id.num_selected_days);
@@ -118,14 +123,18 @@ public class CreateCalendar extends AppCompatActivity {
                 for(int k = 0; k < copy.size(); k++){
                     if(copy.get(k).isClicked() == true){
                         numDays = numDays + 1;
-                        selected.add(copy.get(k).getDay());
+                        selected.add(copy.get(k).getDayAndMonth());
                         //numDays = adapter.getNumDays();
                     }
                 }
                 num.setText("" + numDays);
-                sel.setText("" + selected);
+                if(selected.size() == 0){
+                    sel.setText("none");
+                }
+                else{
+                    sel.setText("" + selected);
+                }
             }
         });
-
     }
 }
