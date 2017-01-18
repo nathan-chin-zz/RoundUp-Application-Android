@@ -38,4 +38,9 @@ public class JoinEvent extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public void onBackPressed(){
+        //super.onBackPressed();
+    }
 }

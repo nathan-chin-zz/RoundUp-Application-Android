@@ -21,4 +21,37 @@
         android:layout_marginStart="128dp"
         android:layout_marginTop="35dp"
         android:id="@+id/textView3" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Code"
+        android:ems="10"
+        android:layout_marginLeft="46dp"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="21dp"
+        android:id="@+id/resultCode"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/resultCode"
+        android:layout_marginTop="74dp"
+        android:id="@+id/resulttxt"
+        android:layout_alignRight="@+id/textView3"
+        android:layout_alignEnd="@+id/textView3" />
+
+    <Button
+        android:text="Results"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/resultCode"
+        android:layout_alignLeft="@+id/resultCode"
+        android:layout_alignStart="@+id/resultCode"
+        android:id="@+id/sendCode" />
 </RelativeLayout>

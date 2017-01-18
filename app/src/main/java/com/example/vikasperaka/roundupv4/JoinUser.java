@@ -11,11 +11,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.MutableData;
-import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 public class JoinUser extends AppCompatActivity {
@@ -24,6 +24,8 @@ public class JoinUser extends AppCompatActivity {
     private EditText nameTxt;
     private String name = "";
     DatabaseReference root;
+    Long n;
+    ArrayList<ArrayList<Long>> test1 = new ArrayList<ArrayList<Long>>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +37,29 @@ public class JoinUser extends AppCompatActivity {
         final String code = getIntent().getExtras().get("code").toString().trim();
         root = FirebaseDatabase.getInstance().getReference().getRoot();
         final DatabaseReference subRoot = root.child(code);
+        final DatabaseReference child = subRoot.child("Enter Name");    //change because currently default setting
 
+        subRoot.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterator i = dataSnapshot.getChildren().iterator();
+                while(i.hasNext()){
+                    //set the user name and description texts to verify if correct
+                    DataSnapshot d = (DataSnapshot)i.next();
+                    if (d.getKey().equals("orgCal")) {
+                        test1 = (ArrayList<ArrayList<Long>>) d.getValue();
+                        ArrayList<Long> in = test1.get(0);
+                        n = in.get(0);
+                    }
 
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
         send.setOnClickListener(new View.OnClickListener() {
@@ -50,30 +73,24 @@ public class JoinUser extends AppCompatActivity {
                 DatabaseReference user = subRoot.child(name);
                 //manipulate user database
                 int rand = (int)(Math.random() * 5 + 1);
-                ArrayList<ArrayList<Integer>> test = (ArrayList<ArrayList<Integer>>) getIntent().getExtras().get("userCal");
-                ArrayList<Integer> inner = new ArrayList<Integer>();
-                inner.add(rand);
-                inner.add(0);
-                inner.add(0);
+                ArrayList<ArrayList<Long>> test = (ArrayList<ArrayList<Long>>) getIntent().getExtras().get("userCal");
+                ArrayList<Long> inner = new ArrayList<Long>();
+                inner.add((long)rand);
+                inner.add((long)0);
+                inner.add((long)0);
                 test.set(0,inner);
-                user.push().setValue(test); //updating user data accordingly
+                Map<String, Object> map2 = new HashMap<String, Object>();
+                map2.put("userCal", test);
+                user.updateChildren(map2);
+                //user.push().setValue(test); //updating user data accordingly
+                // user.getKey();
 
-                //try to use transaction to count number of clicks
-                subRoot.runTransaction(new Transaction.Handler() {
-                    @Override
-                    public Transaction.Result doTransaction(MutableData mutableData) {
-                        return null;
-                    }
-
-                    @Override
-                    public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
-
-                    }
-                });
 
                 Intent i = new Intent(getApplicationContext(), Confirmation.class);
+                i.putExtra("val", n);
                 i.putExtra("name", name);
                 i.putExtra("code", code);
+                i.putExtra("list", test1);
                 startActivity(i);
             }
         });

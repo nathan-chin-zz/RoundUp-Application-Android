@@ -1,5 +1,6 @@
 package com.example.vikasperaka.roundupv4;
 
+// Import statements
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,9 @@ import java.util.ArrayList;
  * Created by Nathan on 1/9/2017.
  */
 
+/**
+ * The CalendarScreen
+ */
 public class CalendarScreen extends AppCompatActivity{
 
     int numDays = 0;
