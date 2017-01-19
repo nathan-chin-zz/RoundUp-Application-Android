@@ -20,6 +20,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 /**
  * This class contains code for the screen after the calendar days have been selected.
  * @author created by Vikas Peraka but written by Nathan Chin
@@ -50,6 +52,9 @@ public class CodeCreate extends AppCompatActivity implements AdapterView.OnItemS
     private long storeEndHour;
     private String storeEndTime;
     private String storeIncrement;
+    private ArrayList<Dates> store = new ArrayList<>();
+    private ArrayList<Hour> test = new ArrayList<>();
+    private ArrayList<Double> test2 = new ArrayList<>();
 
     final int[] hour = {12,1,2,3,4,5,6,7,8,9,10,11};
     final String[] time = {"AM", "PM"};
@@ -124,7 +129,7 @@ public class CodeCreate extends AppCompatActivity implements AdapterView.OnItemS
         pick_increments.setOnItemSelectedListener(this);
         SpinnerIncrementAdapter custom5 = new SpinnerIncrementAdapter(CodeCreate.this, timeIncrements);
         pick_increments.setAdapter(custom5);
-        pick_increments.setSelection(0);
+        pick_increments.setSelection(1);
         increment = custom5.getItemId(5);
 
         /*start_hour = (Spinner) findViewById(R.id.spinner_hour1);
@@ -174,9 +179,29 @@ public class CodeCreate extends AppCompatActivity implements AdapterView.OnItemS
                                 duration = inputDur.getText().toString();
                                 if(duration.length() != 0){
                                     Intent i = new Intent(getApplicationContext(), JoinEvent.class);
+                                    i.putParcelableArrayListExtra("sendAgain", store);
                                     startActivity(i);
                                 }
                                 if(duration.length() == 0){
+                                    test.clear();
+                                    test2.clear();
+                                    store = getIntent().getParcelableArrayListExtra("list_days");
+                                    for(int i = 0; i < store.size(); i++){
+                                        store.get(i).setStartAndEndHours((int)storeStartHour, (int)storeEndHour);
+                                        store.get(i).setStartAndEndTimes(storeStartTime, storeEndTime);
+                                        store.get(i).makeHoursList((int)storeStartHour, (int)storeEndHour, storeStartTime, storeEndTime, storeIncrement);
+                                        test = store.get(i).getHours();
+                                    }
+                                    TextView temp = (TextView) findViewById(R.id.list);
+                                    for(int k = 0; k < test.size(); k++){
+                                        test2.add(test.get(k).getHour());
+                                    }
+                                    if(test2.size() == 0){
+                                        temp.setText("Invalid time range");
+                                    }
+                                    else{
+                                        temp.setText("" + test2);
+                                    }
                                     Toast.makeText(getApplicationContext(), "Enter an approximate duration so those invited " +
                                             "can plan accordingly", Toast.LENGTH_SHORT).show();
                                 }

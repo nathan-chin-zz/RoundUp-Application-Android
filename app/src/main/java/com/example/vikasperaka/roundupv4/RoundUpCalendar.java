@@ -36,10 +36,10 @@ public class RoundUpCalendar extends AppCompatActivity implements Serializable{
     }
 
     public String generateCode(){
-        int max = ALPHABET.length;
+        int max = ALPHABET.length - 1;
         String code = "";
         for (int i = 0; i < CODE_LENGTH; i++) {
-            int random = (int) (Math.random() * max + 1);
+            int random = (int) (Math.random() * max) + 1;
             code += ALPHABET[random];
         }
         return code;

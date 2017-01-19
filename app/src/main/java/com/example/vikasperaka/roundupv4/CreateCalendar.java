@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -32,7 +33,7 @@ public class CreateCalendar extends AppCompatActivity {
     private ArrayList<ArrayList<Integer>> test;
 
     int numDays = 0;
-    ArrayList<Dates> list;
+    ArrayList<Dates> listToSend = new ArrayList<>();
     boolean hasUpdated = false;
 
     /**
@@ -129,6 +130,7 @@ public class CreateCalendar extends AppCompatActivity {
             public void onClick(View view) {
                 ArrayList<String> selected = new ArrayList<>();
                 numDays = 0;
+                listToSend.clear();
                 selected.clear();
                 TextView num = (TextView) findViewById(R.id.num_selected_days);
                 TextView sel = (TextView) findViewById(R.id.selected_days);
@@ -137,6 +139,7 @@ public class CreateCalendar extends AppCompatActivity {
                 for(int k = 0; k < copy.size(); k++){
                     if(copy.get(k).isClicked() == true){
                         numDays = numDays + 1;
+                        listToSend.add(copy.get(k));
                         selected.add(copy.get(k).getDayAndMonth());
                     }
                 }
@@ -154,11 +157,15 @@ public class CreateCalendar extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(!hasUpdated){
+                    Toast.makeText(getApplicationContext(), "You must click update after selecting your days before you can" +
+                            " continue", Toast.LENGTH_SHORT).show();
+                }
                 if(hasUpdated){
                     Intent i = new Intent(getApplicationContext(), CodeCreate.class);
                     i.putExtra("number_days", numDays);
+                    i.putParcelableArrayListExtra("list_days", listToSend);
                     i.putExtra("code", CODE);
-
                     i.putExtra("cal", roundUpCalendar);
                     //i.putExtra("name", name);
                     //i.putExtra("description", description);
