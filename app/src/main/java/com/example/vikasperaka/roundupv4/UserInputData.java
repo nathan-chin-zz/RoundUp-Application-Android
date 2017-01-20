@@ -15,7 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -131,13 +131,18 @@ public class UserInputData extends AppCompatActivity {
                                  Bundle savedInstanceState) {
             ArrayList<Dates> temp = getActivity().getIntent().getParcelableArrayListExtra("sendAgain");
             ArrayList<Hour> temp2 = temp.get(getArguments().getInt(ARG_SECTION_NUMBER) - 1).getHours();
-            ArrayList<String> temp3 = new ArrayList<>();
-            for(int j = 0; j < temp2.size(); j++){
-                temp3.add(temp2.get(j).intToString(temp2.get(j).getHour()));
-            }
             View rootView = inflater.inflate(R.layout.fragment_user_input_data, container, false);
+            HourAdapter adapter = new HourAdapter(this.getActivity(), temp2);
+            adapter.notifyDataSetChanged();
+            ListView listView = (ListView) rootView.findViewById(R.id.hours_list);
+            listView.setAdapter(adapter);
+
+            /*ArrayList<String> temp3 = new ArrayList<>();
+            for(int j = 0; j < temp2.size(); j++){
+                temp3.add(temp2.get(j).numToString(temp2.get(j).getHour()));
+            }
             TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText("" + temp3);
+            textView.setText("" + temp3);*/
 
             //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;

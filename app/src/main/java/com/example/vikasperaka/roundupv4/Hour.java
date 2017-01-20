@@ -40,7 +40,7 @@ public class Hour extends AppCompatActivity implements Serializable {
         isSelected = !isSelected;
     }
 
-    public String intToString(double time){
+    public String numToString(double time){
         String temp = "";
         if(time % 1 == 0){
             temp += (int)time;

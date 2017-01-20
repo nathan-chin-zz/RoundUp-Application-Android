@@ -118,7 +118,7 @@ public class CalendarAdapter extends ArrayAdapter<Dates>{
              */
             @Override
             public void onClick(View v){
-                TextView hi = (TextView) v.findViewById(R.id.number); // Finds the TextView defined in the list_item layout
+                TextView cur = (TextView) v.findViewById(R.id.number); // Finds the TextView defined in the list_item layout
 
                 // If the day clicked/selected is actually a calendar day (and not an empty calendar spot for spacing), then
                 // change its boolean value so it is clicked
@@ -129,7 +129,7 @@ public class CalendarAdapter extends ArrayAdapter<Dates>{
                 // If the GridView clicked has been clicked before and is not an empty calendar spot, then the background color
                 // is changed to show that it has been selected and the number of selected days goes up by one.
                 if(currentDate.isClicked() && currentDate.getFontColor() != Color.TRANSPARENT){
-                    hi.setBackgroundColor(Color.CYAN);
+                    cur.setBackgroundColor(Color.CYAN);
                     numDays = numDays + 1;
                 }
 
@@ -137,7 +137,7 @@ public class CalendarAdapter extends ArrayAdapter<Dates>{
                 // background color is changed to show that it has been unselected and the number of selected days goes
                 // down by one.
                 else if(!currentDate.isClicked() && currentDate.getFontColor() != Color.TRANSPARENT){
-                    hi.setBackgroundColor(Color.LTGRAY);
+                    cur.setBackgroundColor(Color.LTGRAY);
                     numDays = numDays - 1;
                 }
 
