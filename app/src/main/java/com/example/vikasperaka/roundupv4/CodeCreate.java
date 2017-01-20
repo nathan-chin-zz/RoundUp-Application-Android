@@ -53,7 +53,7 @@ public class CodeCreate extends AppCompatActivity implements AdapterView.OnItemS
     private String storeEndTime;
     private String storeIncrement;
     private ArrayList<Dates> store = new ArrayList<>();
-    private ArrayList<Hour> test = new ArrayList<>();
+    private ArrayList<ArrayList<Hour>> test = new ArrayList<>();
     private ArrayList<Double> test2 = new ArrayList<>();
 
     final int[] hour = {12,1,2,3,4,5,6,7,8,9,10,11};
@@ -178,30 +178,36 @@ public class CodeCreate extends AppCompatActivity implements AdapterView.OnItemS
                                 EditText inputDur = (EditText) findViewById(R.id.duration);
                                 duration = inputDur.getText().toString();
                                 if(duration.length() != 0){
-                                    Intent i = new Intent(getApplicationContext(), JoinEvent.class);
-                                    i.putParcelableArrayListExtra("sendAgain", store);
-                                    startActivity(i);
-                                }
-                                if(duration.length() == 0){
                                     test.clear();
+                                    for(int i = 0; i < test.size(); i++){
+                                        test.get(i).clear();
+                                    }
                                     test2.clear();
                                     store = getIntent().getParcelableArrayListExtra("list_days");
                                     for(int i = 0; i < store.size(); i++){
                                         store.get(i).setStartAndEndHours((int)storeStartHour, (int)storeEndHour);
                                         store.get(i).setStartAndEndTimes(storeStartTime, storeEndTime);
                                         store.get(i).makeHoursList((int)storeStartHour, (int)storeEndHour, storeStartTime, storeEndTime, storeIncrement);
-                                        test = store.get(i).getHours();
+                                        test.add(store.get(i).getHours());
                                     }
-                                    TextView temp = (TextView) findViewById(R.id.list);
+                                    //TextView temp = (TextView) findViewById(R.id.list);
                                     for(int k = 0; k < test.size(); k++){
-                                        test2.add(test.get(k).getHour());
+                                        for(int j = 0; j < test.get(k).size(); j++){
+                                            test2.add(test.get(k).get(j).getHour());
+                                        }
                                     }
                                     if(test2.size() == 0){
-                                        temp.setText("Invalid time range");
+                                        Toast.makeText(getApplicationContext(), "Please enter a valid time range",
+                                                Toast.LENGTH_SHORT);
                                     }
                                     else{
-                                        temp.setText("" + test2);
+                                        //temp.setText("" + test2);
+                                        Intent i = new Intent(getApplicationContext(), UserInputData.class);
+                                        i.putParcelableArrayListExtra("sendAgain", store);
+                                        startActivity(i);
                                     }
+                                }
+                                if(duration.length() == 0){
                                     Toast.makeText(getApplicationContext(), "Enter an approximate duration so those invited " +
                                             "can plan accordingly", Toast.LENGTH_SHORT).show();
                                 }

@@ -42,8 +42,11 @@ public class Hour extends AppCompatActivity implements Serializable {
 
     public String intToString(double time){
         String temp = "";
-        temp += time;
-        if(isHalf){
+        if(time % 1 == 0){
+            temp += (int)time;
+        }
+        else{
+            temp += (int)time;
             temp += ":30";
         }
         return temp;

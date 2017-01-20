@@ -16,12 +16,16 @@
         android:id="@+id/eventName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="2"
+        android:maxLength="100"
         android:hint="@string/name_event" />
 
     <EditText
         android:id="@+id/eventDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLines="4"
+        android:maxLength="200"
         android:hint="@string/description_event" />
 
     <Button

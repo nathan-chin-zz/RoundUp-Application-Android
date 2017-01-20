@@ -1,7 +1,7 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">RoundUp</string>
     <string name="title_activity_splash_screen">Splash Screen</string>
-    <string name="description">Description<xliff:g id="write" example="Amy">%s</xliff:g></string>
+    <string name="description">Description<xliff:g example="Amy" id="write">%s</xliff:g></string>
     <string name="highlight">Select the possible days you would like to have the event on</string>
     <string name="unique_code"></string>
     <string name="no_back">Please highlight the days you are available to meet</string>
@@ -77,6 +77,9 @@
         <item>30 min</item>
         <item>60 min</item>
     </string-array>
+    <string name="title_activity_user_input_data">UserInputData</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 
 </resources>
 
