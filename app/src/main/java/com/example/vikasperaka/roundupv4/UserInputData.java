@@ -15,7 +15,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.Button;
+import android.widget.GridView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -35,6 +37,7 @@ public class UserInputData extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private ArrayList<Hour> masterList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +77,14 @@ public class UserInputData extends AppCompatActivity {
             }
         });
 
+        Button finish = (Button) findViewById(R.id.finish);
+        finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }
@@ -99,6 +110,10 @@ public class UserInputData extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public ArrayList<ArrayList<Dates>> updateData(){
+        return new ArrayList<ArrayList<Dates>>();
     }
 
     /**
@@ -129,22 +144,44 @@ public class UserInputData extends AppCompatActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
+
             ArrayList<Dates> temp = getActivity().getIntent().getParcelableArrayListExtra("sendAgain");
-            ArrayList<Hour> temp2 = temp.get(getArguments().getInt(ARG_SECTION_NUMBER) - 1).getHours();
+            final ArrayList<Hour> temp2 = temp.get(getArguments().getInt(ARG_SECTION_NUMBER) - 1).getHours();
+
             View rootView = inflater.inflate(R.layout.fragment_user_input_data, container, false);
-            HourAdapter adapter = new HourAdapter(this.getActivity(), temp2);
+            final HourAdapter adapter = new HourAdapter(this.getActivity(), temp2);
             adapter.notifyDataSetChanged();
-            ListView listView = (ListView) rootView.findViewById(R.id.hours_list);
-            listView.setAdapter(adapter);
-
-            /*ArrayList<String> temp3 = new ArrayList<>();
-            for(int j = 0; j < temp2.size(); j++){
-                temp3.add(temp2.get(j).numToString(temp2.get(j).getHour()));
+            GridView gridView = (GridView) rootView.findViewById(R.id.hours_list);
+            gridView.setAdapter(adapter);
+            gridView.setVerticalScrollbarPosition(View.SCROLLBAR_POSITION_RIGHT);
+            if (temp2.get(1).getHour() % 1 == 0) {
+                gridView.setNumColumns(1);
+            } else {
+                gridView.setNumColumns(2);
             }
-            TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-            textView.setText("" + temp3);*/
 
-            //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+            final TextView textView = (TextView) rootView.findViewById(R.id.num_selected_hours);
+            textView.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View view){
+                    ArrayList<String> temp3 = new ArrayList<String>();
+                    for(int k = 0; k < temp2.size(); k++){
+                            if(temp2.get(k).isClicked()){
+                                temp3.add(temp2.get(0).numToString(temp2.get(k).getHour()));
+                            }
+                    }
+            /*for(int j = 0; j < temp2.size(); j++){
+                if(temp2.get(j).isClicked()){
+                    temp3.add(temp2.get(j).numToString(temp2.get(j).getHour()));
+                }
+            }*/
+                    textView.setText("" + temp3);
+                }
+            });
+
+
+                //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+                //return rootView;
             return rootView;
         }
     }

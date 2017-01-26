@@ -1,11 +1,30 @@
-<ListView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/hours_list"
-    android:layout_width="100dp"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:divider="@android:color/transparent"
-    android:padding="10dp"
-    android:scrollbarStyle="insideOverlay"
-    tools:context="com.example.vikasperaka.roundupv4.UserInputData$PlaceholderFragment">
-</ListView>
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/num_selected_hours"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Hi" />
+
+    <GridView
+        android:id="@+id/hours_list"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:divider="@android:color/transparent"
+        android:scrollbarStyle="insideOverlay"
+        android:horizontalSpacing="0dp"
+        android:verticalSpacing="10dp"
+        android:stretchMode="columnWidth"
+        android:gravity="center"
+        android:layout_weight="2"
+        tools:context="com.example.vikasperaka.roundupv4.UserInputData$PlaceholderFragment">
+    </GridView>
+
+</LinearLayout>
+

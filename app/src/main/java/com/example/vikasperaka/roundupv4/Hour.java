@@ -56,6 +56,10 @@ public class Hour extends AppCompatActivity implements Serializable {
         return time;
     }
 
+    public String getTimeOfDay(){
+        return timeOfDay;
+    }
+
     /**
      * The translateHour method returns the hour given in a String format along with time of day (AM or PM)
      * @param hour the hour of the day to translate into a String

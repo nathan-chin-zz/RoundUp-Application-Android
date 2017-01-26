@@ -22,7 +22,7 @@
 
     <!--For CreateEvent-->
     <string name="name_event">Name of Event</string>
-    <string name="description_event">Event Description (ex: activity, place, etc.)</string>
+    <string name="description_event">Event Description (activity, place, etc.)</string>
     <string name="roundup_button">RoundUp!!</string>
     <string name="error_name">Enter an event name to continue</string>
     <string name="error_description">Enter an event description to continue</string>

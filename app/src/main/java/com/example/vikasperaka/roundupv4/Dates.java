@@ -427,51 +427,19 @@ public class Dates extends AppCompatActivity implements Parcelable {
                     hours.add(new Hour(12.5, startTime));
                     startHour = 1;
                 }
-                for (double j = startHour; j <= 12; j += 0.5) {
+                for (double j = startHour; j < 12; j += 0.5) {
                     hours.add(new Hour(j, startTime));
                 }
+                hours.add(new Hour(12, endTime));
                 if(endHour != 12) {
-                    hours.add(new Hour(12.5, startTime));
+                    hours.add(new Hour(12.5, endTime));
                     for(double j = 1; j <= endHour; j += 0.5){
-                        hours.add(new Hour(j, startTime));
+                        hours.add(new Hour(j, endTime));
                     }
+                    hours.add(new Hour((endHour + 0.5), endTime));
                 }
             }
         }
-            /*if(startHour == 12){
-                hours.add(new Hour(12, startTime));
-                hours.add(new Hour(12.5, startTime));
-                startHour = 1;
-            }
-            if(endHour == 12){
-                for(double k = startHour; k < 12; k += 0.5){
-                    hours.add(new Hour(k, startTime));
-                }
-                hours.add(new Hour(12, endTime));
-            }
-            else{
-                for(double k = startHour; k < 12; k += 0.5){
-                    hours.add(new Hour(k, startTime));
-                }
-                hours.add(new Hour(12, endTime));
-                for(int l = 1; l <= endHour; l += 0.5){
-                    hours.add(new Hour(l, endTime));
-                }
-            }*/
-            /*if(startHour == 12) {
-                hours.add(new Hour(12, startTime));
-                hours.add(new Hour(12.5, startTime));
-                startHour = 1;
-            }
-            for(int k = startHour; k < 12; k += 0.5){
-                hours.add(new Hour(k, startTime));
-            }
-            hours.add(new Hour(12, endTime));
-            hours.add(new Hour(12.5, endTime));
-            for(int l = 1; l <= endHour; l += 0.5){
-                hours.add(new Hour(l, endTime));
-            }
-        }*/
 
         // Check AM AM
         else if(startTime.equals("AM") && endTime.equals("AM") && increment.equals("60 min")){
@@ -499,11 +467,13 @@ public class Dates extends AppCompatActivity implements Parcelable {
                     for(double j = 1; j <= endHour; j += 0.5){
                         hours.add(new Hour(j, startTime));
                     }
+                    hours.add(new Hour(endHour + 0.5, startTime));
                 }
                 else{
                     for(double j = startHour; j <= endHour; j += 0.5){
                         hours.add(new Hour(j, startTime));
                     }
+                    hours.add(new Hour((endHour + 0.5), endTime));
                 }
             }
         }
@@ -533,11 +503,13 @@ public class Dates extends AppCompatActivity implements Parcelable {
                     for(double j = 1; j <= endHour; j += 0.5){
                         hours.add(new Hour(j, startTime));
                     }
+                    hours.add(new Hour(endHour + 0.5, endTime));
                 }
                 else{
                     for(double j = startHour; j <= endHour; j += 0.5){
                         hours.add(new Hour(j, startTime));
                     }
+                    hours.add(new Hour(endHour + 0.5, endTime));
                 }
             }
         }

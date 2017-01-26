@@ -198,7 +198,7 @@ public class CodeCreate extends AppCompatActivity implements AdapterView.OnItemS
                                     }
                                     if(test2.size() == 0){
                                         Toast.makeText(getApplicationContext(), "Please enter a valid time range",
-                                                Toast.LENGTH_SHORT);
+                                                Toast.LENGTH_SHORT).show();
                                     }
                                     else{
                                         //temp.setText("" + test2);

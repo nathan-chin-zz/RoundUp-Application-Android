@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -122,23 +123,34 @@ public class CalendarAdapter extends ArrayAdapter<Dates>{
 
                 // If the day clicked/selected is actually a calendar day (and not an empty calendar spot for spacing), then
                 // change its boolean value so it is clicked
-                if(currentDate.getFontColor() != Color.TRANSPARENT){
-                    currentDate.clickTheDay();
-                }
 
-                // If the GridView clicked has been clicked before and is not an empty calendar spot, then the background color
-                // is changed to show that it has been selected and the number of selected days goes up by one.
-                if(currentDate.isClicked() && currentDate.getFontColor() != Color.TRANSPARENT){
-                    cur.setBackgroundColor(Color.CYAN);
-                    numDays = numDays + 1;
-                }
+                    if(currentDate.getFontColor() != Color.TRANSPARENT){
+                        currentDate.clickTheDay();
+                    }
 
-                // Else if the GridView clicked has not been clicked before and is not an empty calendar spot, then the
-                // background color is changed to show that it has been unselected and the number of selected days goes
-                // down by one.
-                else if(!currentDate.isClicked() && currentDate.getFontColor() != Color.TRANSPARENT){
-                    cur.setBackgroundColor(Color.LTGRAY);
-                    numDays = numDays - 1;
+                    // Else if the GridView clicked has not been clicked before and is not an empty calendar spot, then the
+                    // background color is changed to show that it has been unselected and the number of selected days goes
+                    // down by one.
+                    if(!currentDate.isClicked() && currentDate.getFontColor() != Color.TRANSPARENT){
+                        cur.setBackgroundColor(Color.LTGRAY);
+                        numDays = numDays - 1;
+                    }
+
+                if(numDays < 21){
+
+                    // If the GridView clicked has been clicked before and is not an empty calendar spot, then the background color
+                    // is changed to show that it has been selected and the number of selected days goes up by one.
+                    if(currentDate.isClicked() && currentDate.getFontColor() != Color.TRANSPARENT){
+                        cur.setBackgroundColor(Color.CYAN);
+                        numDays = numDays + 1;
+                    }
+                }
+                else{
+                    if(currentDate.getFontColor() != Color.TRANSPARENT){
+                        currentDate.clickTheDay();
+                    }
+                    Toast.makeText(getContext(), "For maximum efficiency, please do not choose more than 21 days",
+                            Toast.LENGTH_SHORT).show();
                 }
 
             }

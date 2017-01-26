@@ -161,7 +161,10 @@ public class CreateCalendar extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "You must click update after selecting your days before you can" +
                             " continue", Toast.LENGTH_SHORT).show();
                 }
-                if(hasUpdated){
+                else if(numDays == 0){
+                    Toast.makeText(getApplicationContext(), "Please select at least one date", Toast.LENGTH_SHORT).show();
+                }
+                if(hasUpdated && numDays != 0){
                     Intent i = new Intent(getApplicationContext(), CodeCreate.class);
                     i.putExtra("number_days", numDays);
                     i.putParcelableArrayListExtra("list_days", listToSend);
