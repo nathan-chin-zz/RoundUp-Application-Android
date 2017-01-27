@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Created by Nathan on 1/18/2017.
  */
 
-public class Hour extends AppCompatActivity implements Serializable {
+public class Hour extends AppCompatActivity implements Serializable, Comparable<Hour> {
     private double time;
     private String timeOfDay;
     private boolean isSelected;
@@ -52,12 +52,85 @@ public class Hour extends AppCompatActivity implements Serializable {
         return temp;
     }
 
+    public double getHourFrom24(double mHour, String mTimeOfDay){
+        double change = 0;
+        if(mTimeOfDay.equals("AM")){
+            if(mHour == 12){
+                change = 0;
+                if(mHour % 1 == 0){
+                    change += 0.5;
+                }
+            }
+            else{
+                if(mHour % 1 == 0){
+                    change = mHour + 0.5;
+                }
+                else{
+                    change = mHour;
+                }
+            }
+        }
+        else if(mTimeOfDay.equals("PM")){
+            if(mHour != 12){
+                switch((int)mHour)   {
+                    case 1:     change = 13;
+                        break;
+                    case 2:     change = 14;
+                        break;
+                    case 3:     change = 15;
+                        break;
+                    case 4:     change = 16;
+                        break;
+                    case 5:     change = 17;
+                        break;
+                    case 6:     change = 18;
+                        break;
+                    case 7:     change = 19;
+                        break;
+                    case 8:     change = 20;
+                        break;
+                    case 9:     change = 21;
+                        break;
+                    case 10:    change = 22;
+                        break;
+                    case 11:    change = 23;
+                        break;
+                }
+            }
+            else{
+                change = mHour;
+            }
+            if(time % 1 == 0){
+                change += 0.5;
+            }
+        }
+        return change;
+    }
+
     public double getHour(){
         return time;
     }
 
     public String getTimeOfDay(){
         return timeOfDay;
+    }
+
+    public int compareTo(Hour check){
+        int temp;
+        double compareHour = 0;
+        double currentHour = 0;
+        compareHour = getHourFrom24(check.getHour(), check.getTimeOfDay());
+        currentHour = getHourFrom24(time, timeOfDay);
+        if(compareHour >= currentHour){
+            temp = -1;
+        }
+        else if(compareHour <= currentHour){
+            temp = 1;
+        }
+        else{
+            temp = 0;
+        }
+        return temp;
     }
 
     /**

@@ -33,9 +33,10 @@ public class HourAdapter extends ArrayAdapter<Hour> {
         return theSelected;
     }
 
+
     @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         // Check if the existing view is being reused, otherwise inflate the view
         View gridItemView = convertView;
         if(gridItemView == null) {
@@ -59,9 +60,13 @@ public class HourAdapter extends ArrayAdapter<Hour> {
         // of selection when the View is scrolled back onto the screen
         if(currentHour.isClicked() == false){
             hour.setBackgroundColor(Color.LTGRAY); //Color.LTGRAY is the default color. The View is not selected.
+            numHours = numHours - 1;
+            theSelected.remove(currentHour);
         }
-        else{
+        else if(currentHour.isClicked()){
             hour.setBackgroundColor(Color.CYAN); //Color.CYAN is the color when the View is selected.
+            numHours = numHours + 1;
+            theSelected.add(currentHour);
         }
 
         // Setting an onClickListener on each View performs actions when clicked

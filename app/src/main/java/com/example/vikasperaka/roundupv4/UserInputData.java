@@ -18,8 +18,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class UserInputData extends AppCompatActivity {
 
@@ -37,7 +40,7 @@ public class UserInputData extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
-    private ArrayList<Hour> masterList = new ArrayList<>();
+    private ArrayList<ArrayList<Hour>> masterList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,13 +84,31 @@ public class UserInputData extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ArrayList<ArrayList<Double>> endData = new ArrayList<ArrayList<Double>>();
+                for(int i = 0; i < masterList.size(); i++){
+                    endData.add(new ArrayList<Double>());
+                    for(int j = 0; j < masterList.get(i).size(); j++){
+                        endData.get(i).add(masterList.get(i).get(j).getHour());
+                    }
+                }
+                Toast.makeText(getApplicationContext(), "" + endData, Toast.LENGTH_SHORT).show();
             }
         });
 
         tabLayout.setupWithViewPager(mViewPager);
         mViewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
     }
+
+    public void updateSelected(ArrayList<Hour> selectedHours, int position, int size){
+        //ArrayList<ArrayList<Hour>> theData = new ArrayList<>();
+        if(masterList.size() == 0){
+            for(int i = 0; i < size; i++){
+                masterList.add(new ArrayList<Hour>());
+            }
+        }
+        masterList.set(position, selectedHours);
+    }
+
 
 
     @Override
@@ -112,10 +133,6 @@ public class UserInputData extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public ArrayList<ArrayList<Dates>> updateData(){
-        return new ArrayList<ArrayList<Dates>>();
-    }
-
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -124,7 +141,9 @@ public class UserInputData extends AppCompatActivity {
          * The fragment argument representing the section number for this
          * fragment.
          */
+
         private static final String ARG_SECTION_NUMBER = "section_number";
+        private ArrayList<Hour> cumulative = new ArrayList<>();
 
         public PlaceholderFragment() {
         }
@@ -141,24 +160,64 @@ public class UserInputData extends AppCompatActivity {
             return fragment;
         }
 
+        public void setSize(ArrayList<Hour> change){
+            ArrayList<Dates> temp = getActivity().getIntent().getParcelableArrayListExtra("sendAgain");
+            /*if(change.size() == 0){
+                for(int i = 0; i < temp.size(); i++){
+                    change.add(new ArrayList<Hour>());
+                }
+            }*/
+            cumulative.add(new Hour());
+        }
+
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
-
+            int[] posClicked;
             ArrayList<Dates> temp = getActivity().getIntent().getParcelableArrayListExtra("sendAgain");
             final ArrayList<Hour> temp2 = temp.get(getArguments().getInt(ARG_SECTION_NUMBER) - 1).getHours();
+            int curNum = getArguments().getInt(ARG_SECTION_NUMBER) - 1;
+            //setSize(cumulative);
+            cumulative.clear();
+            /*for(int k = 0; k < temp2.size(); k++){
+                if(temp2.get(k).isClicked()){
+                    cumulative.add(temp2.get(k));
+                }
+            }*/
 
             View rootView = inflater.inflate(R.layout.fragment_user_input_data, container, false);
             final HourAdapter adapter = new HourAdapter(this.getActivity(), temp2);
             adapter.notifyDataSetChanged();
             GridView gridView = (GridView) rootView.findViewById(R.id.hours_list);
             gridView.setAdapter(adapter);
+            cumulative = adapter.getTheSelected();
+            Collections.sort(cumulative, new Comparator<Hour>() {
+                @Override
+                public int compare(Hour o1, Hour o2) {
+                    int temp;
+                    double first = o1.getHourFrom24(o1.getHour(),o1.getTimeOfDay());
+                    double second = o2.getHourFrom24(o2.getHour(),o2.getTimeOfDay());
+                    if(first >= second){
+                        temp = -1;
+                    }
+                    else if(first <= second){
+                        temp = 1;
+                    }
+                    else{
+                        temp = 0;
+                    }
+                    return temp;
+                }
+            });
             gridView.setVerticalScrollbarPosition(View.SCROLLBAR_POSITION_RIGHT);
             if (temp2.get(1).getHour() % 1 == 0) {
                 gridView.setNumColumns(1);
             } else {
                 gridView.setNumColumns(2);
             }
+
+            UserInputData myActivity = (UserInputData)getActivity();
+            myActivity.updateSelected(cumulative, curNum, temp.size());
 
             final TextView textView = (TextView) rootView.findViewById(R.id.num_selected_hours);
             textView.setOnClickListener(new View.OnClickListener(){
@@ -167,7 +226,7 @@ public class UserInputData extends AppCompatActivity {
                     ArrayList<String> temp3 = new ArrayList<String>();
                     for(int k = 0; k < temp2.size(); k++){
                             if(temp2.get(k).isClicked()){
-                                temp3.add(temp2.get(0).numToString(temp2.get(k).getHour()));
+                                temp3.add(temp2.get(k).numToString(temp2.get(k).getHour()));
                             }
                     }
             /*for(int j = 0; j < temp2.size(); j++){

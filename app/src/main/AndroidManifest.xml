@@ -8,26 +8,39 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateEvent" />
-        <activity android:name=".JoinEvent" />
-        <activity android:name=".Results" />
-        <activity android:name=".JoinCalendar" />
-        <activity android:name=".JoinUser" />
-        <activity android:name=".Confirmation" />
-        <activity android:name=".CreateCalendar" />
-        <activity android:name=".CodeCreate" />
-        <activity android:name=".CalendarScreen" />
+        <activity
+            android:name=".CreateEvent"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".JoinEvent"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Results"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".JoinCalendar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".JoinUser"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".Confirmation"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CreateCalendar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CodeCreate"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".CalendarScreen"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".UserInputData"
             android:label="@string/title_activity_user_input_data"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+            android:screenOrientation="portrait"
+        </activity>
     </application>
 
 </manifest>
