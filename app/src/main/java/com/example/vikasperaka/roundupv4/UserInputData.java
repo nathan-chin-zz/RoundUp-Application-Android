@@ -21,8 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
 public class UserInputData extends AppCompatActivity {
 
@@ -191,24 +189,6 @@ public class UserInputData extends AppCompatActivity {
             GridView gridView = (GridView) rootView.findViewById(R.id.hours_list);
             gridView.setAdapter(adapter);
             cumulative = adapter.getTheSelected();
-            Collections.sort(cumulative, new Comparator<Hour>() {
-                @Override
-                public int compare(Hour o1, Hour o2) {
-                    int temp;
-                    double first = o1.getHourFrom24(o1.getHour(),o1.getTimeOfDay());
-                    double second = o2.getHourFrom24(o2.getHour(),o2.getTimeOfDay());
-                    if(first >= second){
-                        temp = -1;
-                    }
-                    else if(first <= second){
-                        temp = 1;
-                    }
-                    else{
-                        temp = 0;
-                    }
-                    return temp;
-                }
-            });
             gridView.setVerticalScrollbarPosition(View.SCROLLBAR_POSITION_RIGHT);
             if (temp2.get(1).getHour() % 1 == 0) {
                 gridView.setNumColumns(1);

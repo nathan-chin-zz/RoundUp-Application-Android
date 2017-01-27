@@ -2,6 +2,7 @@ package com.example.vikasperaka.roundupv4;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Created by Nathan on 1/20/2017.
@@ -17,8 +20,11 @@ import java.util.ArrayList;
 
 public class HourAdapter extends ArrayAdapter<Hour> {
 
+    private int lengthOfList;
+
     public HourAdapter(Activity context, ArrayList<Hour> hours){
         super(context, 0, hours);
+        lengthOfList = hours.size();
     }
 
     // Instance variables
@@ -31,6 +37,34 @@ public class HourAdapter extends ArrayAdapter<Hour> {
 
     public ArrayList<Hour> getTheSelected(){
         return theSelected;
+    }
+
+    public void sortTheList(ArrayList<Hour> theList){
+        if(theList.size() != 1){
+            Collections.sort(theList, new Comparator<Hour>() {
+                @Override
+                public int compare(Hour o1, Hour o2) {
+                    return o1.compareTo(o2);
+                }
+            });
+        }
+    }
+
+    public int checkIfInList(Hour checkHour){
+        /*boolean truth = false;
+        for (int g = 0; g < theSelected.size(); g++){
+            Hour tempHour = theSelected.get(g);
+            int temp = tempHour.compareTo(checkHour);
+            if(temp == 0){
+                truth = true;
+            }
+            else{
+                truth = false;
+            }
+        }
+        return truth;*/
+        int truth = theSelected.indexOf(checkHour);
+        return truth;
     }
 
 
@@ -56,17 +90,48 @@ public class HourAdapter extends ArrayAdapter<Hour> {
         // The day is displayed in the font color specified for the Dates object
         hour.setTextColor(Color.GRAY);
 
+        theSelected.clear();
+        for(int h = 0; h < lengthOfList; h++){
+            Hour tempHour = getItem(h);
+            if(tempHour.isClicked()){
+                theSelected.add(tempHour);
+            }
+        }
+
         // Initializes the background colors of the GridView items. This allows Views that are recycled to maintain the color
         // of selection when the View is scrolled back onto the screen
         if(currentHour.isClicked() == false){
             hour.setBackgroundColor(Color.LTGRAY); //Color.LTGRAY is the default color. The View is not selected.
-            numHours = numHours - 1;
-            theSelected.remove(currentHour);
+            if(checkIfInList(currentHour) != -1) {
+                numHours = numHours - 1;
+                //theSelected.remove(currentHour);
+                //sortTheList(theSelected);
+            }
         }
         else if(currentHour.isClicked()){
             hour.setBackgroundColor(Color.CYAN); //Color.CYAN is the color when the View is selected.
-            numHours = numHours + 1;
-            theSelected.add(currentHour);
+            if(checkIfInList(currentHour) == -1) {
+                numHours = numHours + 1;
+                //theSelected.add(currentHour);
+                //sortTheList(theSelected);
+            }
+        }
+
+        ColorDrawable viewColor = (ColorDrawable)hour.getBackground();
+        int colorID = viewColor.getColor();
+        if(colorID == Color.CYAN){
+            if(checkIfInList(currentHour) == -1) {
+                numHours = numHours + 1;
+                //theSelected.add(currentHour);
+                //sortTheList(theSelected);
+            }
+        }
+        else{
+            if(checkIfInList(currentHour) != -1) {
+                numHours = numHours - 1;
+                //theSelected.remove(currentHour);
+                //sortTheList(theSelected);
+            }
         }
 
         // Setting an onClickListener on each View performs actions when clicked
@@ -85,6 +150,7 @@ public class HourAdapter extends ArrayAdapter<Hour> {
                     cur.setBackgroundColor(Color.CYAN);
                     numHours = numHours + 1;
                     theSelected.add(currentHour);
+                    sortTheList(theSelected);
                 }
 
                 // Else if the GridView clicked has not been clicked before and is not an empty calendar spot, then the
@@ -93,9 +159,10 @@ public class HourAdapter extends ArrayAdapter<Hour> {
                 else if(!currentHour.isClicked()){
                     cur.setBackgroundColor(Color.LTGRAY);
                     numHours = numHours - 1;
-                    if(!theSelected.isEmpty()){
-                        theSelected.remove(currentHour);
-                    }
+                    //if(!theSelected.isEmpty()){
+                        //theSelected.remove(currentHour);
+                        //sortTheList(theSelected);
+                    //}
                 }
 
             }
