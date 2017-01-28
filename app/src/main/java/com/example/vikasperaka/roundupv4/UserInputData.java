@@ -82,13 +82,14 @@ public class UserInputData extends AppCompatActivity {
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<ArrayList<Double>> endData = new ArrayList<ArrayList<Double>>();
+                ArrayList<ArrayList<Double>> endData = new ArrayList<>();
                 for(int i = 0; i < masterList.size(); i++){
                     endData.add(new ArrayList<Double>());
                     for(int j = 0; j < masterList.get(i).size(); j++){
                         endData.get(i).add(masterList.get(i).get(j).getHour());
                     }
                 }
+                //changeToBoolean(endData);
                 Toast.makeText(getApplicationContext(), "" + endData, Toast.LENGTH_SHORT).show();
             }
         });
@@ -105,6 +106,21 @@ public class UserInputData extends AppCompatActivity {
             }
         }
         masterList.set(position, selectedHours);
+    }
+    public ArrayList<ArrayList<Boolean>> changeToBoolean(ArrayList<ArrayList<Hour>> input){
+        ArrayList<ArrayList<Boolean>> sendToDatabase = new ArrayList<>();
+        for(int g = 0; g < input.size(); g++){
+            sendToDatabase.add(new ArrayList<Boolean>());
+            for(int h = 0; h < input.get(g).size(); h++){
+                if(input.get(g).get(h).isClicked()){
+                    sendToDatabase.get(g).add(true);
+                }
+                else{
+                    sendToDatabase.get(g).add(false);
+                }
+            }
+        }
+        return sendToDatabase;
     }
 
 

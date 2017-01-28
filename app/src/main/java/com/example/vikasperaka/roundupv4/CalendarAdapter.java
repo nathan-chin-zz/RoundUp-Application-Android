@@ -3,6 +3,7 @@ package com.example.vikasperaka.roundupv4;
 // Import statements (auto import on)
 import android.app.Activity;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
@@ -124,8 +125,73 @@ public class CalendarAdapter extends ArrayAdapter<Dates>{
                 // If the day clicked/selected is actually a calendar day (and not an empty calendar spot for spacing), then
                 // change its boolean value so it is clicked
 
-                    if(currentDate.getFontColor() != Color.TRANSPARENT){
+                ColorDrawable color = (ColorDrawable)cur.getBackground();
+                int hi = color.getColor();
+                if(numDays < 21){
+                    if(hi == Color.CYAN){
                         currentDate.clickTheDay();
+                        numDays = numDays - 1;
+                        cur.setBackgroundColor(Color.LTGRAY);
+                    }
+                    else{
+                        if (currentDate.getFontColor() == Color.TRANSPARENT) {
+                            Toast.makeText(getContext(), "Please select a valid day", Toast.LENGTH_SHORT).show();
+                        } else if ((currentDate.getDay() < currentDay) && (currentDate.getMonth() == currentMonth)) {
+                            Toast.makeText(getContext(), "Please select a valid day", Toast.LENGTH_SHORT).show();
+                        } else if(currentDate.getMonth() < currentMonth) {
+                            Toast.makeText(getContext(), "Please select a valid day", Toast.LENGTH_SHORT).show();
+                        }
+                        if((currentDate.getFontColor() != Color.TRANSPARENT) && ((currentDate.getDay() >= currentDay) && (currentDate.getMonth() == currentMonth))){
+                            currentDate.clickTheDay();
+                            cur.setBackgroundColor(Color.CYAN);
+                            numDays = numDays + 1;
+                        }
+                        else if((currentDate.getFontColor() != Color.TRANSPARENT) && (currentDate.getMonth() > currentMonth)){
+                            currentDate.clickTheDay();
+                            cur.setBackgroundColor(Color.CYAN);
+                            numDays = numDays + 1;
+                        }
+                    }
+                }
+                else{
+                    if(hi == Color.CYAN){
+                        currentDate.clickTheDay();
+                        numDays = numDays - 1;
+                        cur.setBackgroundColor(Color.LTGRAY);
+                    }
+                    else{
+                        if (currentDate.getFontColor() == Color.TRANSPARENT) {
+                            Toast.makeText(getContext(), "Please select a valid day", Toast.LENGTH_SHORT).show();
+                        } else if ((currentDate.getDay() < currentDay) && (currentDate.getMonth() == currentMonth)) {
+                            Toast.makeText(getContext(), "Please select a valid day", Toast.LENGTH_SHORT).show();
+                        } else if(currentDate.getMonth() < currentMonth) {
+                            Toast.makeText(getContext(), "Please select a valid day", Toast.LENGTH_SHORT).show();
+                        }
+                        if((currentDate.getFontColor() != Color.TRANSPARENT) && ((currentDate.getDay() >= currentDay) && (currentDate.getMonth() == currentMonth))){
+                            Toast.makeText(getContext(), "Please do not select more than 21 dates", Toast.LENGTH_SHORT).show();
+                        }
+                        else if((currentDate.getFontColor() != Color.TRANSPARENT) && (currentDate.getMonth() > currentMonth)){
+                            Toast.makeText(getContext(), "Please do not select more than 21 dates", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+
+
+                    // If day selected has a number on it and is either the current day or later, then click the day
+                    /*if((currentDate.getFontColor() != Color.TRANSPARENT) && ((currentDate.getDay() >= currentDay) && (currentDate.getMonth() == currentMonth))){
+                        currentDate.clickTheDay();
+                    }
+                    // Else if day selected has a number on it and is a month
+                    else if((currentDate.getFontColor() != Color.TRANSPARENT) && ((currentDate.getMonth() > currentMonth))){
+                        currentDate.clickTheDay();
+                    }
+                    // Else if day selected has no number on it then click on it
+                    else if((currentDate.getFontColor() == Color.TRANSPARENT)){
+                        //currentDate.clickTheDay();
+                    }
+                    else{
+                        Toast.makeText(getContext(), "Please select a valid day", Toast.LENGTH_SHORT).show();
+                        numDays = numDays + 1;
                     }
 
                     // Else if the GridView clicked has not been clicked before and is not an empty calendar spot, then the
@@ -134,6 +200,9 @@ public class CalendarAdapter extends ArrayAdapter<Dates>{
                     if(!currentDate.isClicked() && currentDate.getFontColor() != Color.TRANSPARENT){
                         cur.setBackgroundColor(Color.LTGRAY);
                         numDays = numDays - 1;
+                    }
+                    else if(!currentDate.isClicked() && currentDate.getFontColor() == Color.TRANSPARENT){
+                        numDays = numDays + 1;
                     }
 
                 if(numDays < 21){
@@ -148,10 +217,16 @@ public class CalendarAdapter extends ArrayAdapter<Dates>{
                 else{
                     if(currentDate.getFontColor() != Color.TRANSPARENT){
                         currentDate.clickTheDay();
+                        if((currentDate.getDay() >= currentDay) && (currentDate.getMonth() == currentMonth)) {
+                            Toast.makeText(getContext(), "For maximum efficiency, please do not choose more than 21 days",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                        else if(currentDate.getMonth() > currentMonth) {
+                            Toast.makeText(getContext(), "For maximum efficiency, please do not choose more than 21 days",
+                                    Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    Toast.makeText(getContext(), "For maximum efficiency, please do not choose more than 21 days",
-                            Toast.LENGTH_SHORT).show();
-                }
+                }*/
 
             }
         });
