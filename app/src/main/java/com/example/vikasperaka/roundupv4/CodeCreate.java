@@ -204,6 +204,12 @@ public class CodeCreate extends AppCompatActivity implements AdapterView.OnItemS
                                         //temp.setText("" + test2);
                                         Intent i = new Intent(getApplicationContext(), UserInputData.class);
                                         i.putParcelableArrayListExtra("sendAgain", store);
+                                        i.putExtra("numDays", test.size());
+                                        i.putExtra("startHour", storeStartHour);
+                                        i.putExtra("endHour", storeEndHour);
+                                        i.putExtra("startTime", storeStartTime);
+                                        i.putExtra("endTime", storeEndTime);
+                                        i.putExtra("increment", storeIncrement);
                                         startActivity(i);
                                     }
                                 }

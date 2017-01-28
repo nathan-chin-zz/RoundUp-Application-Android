@@ -38,6 +38,8 @@ public class HourAdapter extends ArrayAdapter<Hour> {
     public ArrayList<Hour> getTheSelected(){
         return theSelected;
     }
+    private Hour toAdd = new Hour();
+    private Hour toRemove = new Hour();
 
     public void sortTheList(ArrayList<Hour> theList){
         if(theList.size() != 1){
@@ -67,6 +69,14 @@ public class HourAdapter extends ArrayAdapter<Hour> {
         return truth;
     }
 
+    public Hour getToAdd(){
+        return toAdd;
+    }
+
+    public Hour getToRemove(){
+        return toRemove;
+    }
+
 
     @NonNull
     @Override
@@ -82,7 +92,7 @@ public class HourAdapter extends ArrayAdapter<Hour> {
         final Hour currentHour = getItem(position);
 
         // Find the TextView in the list_item.xml layout with the ID version_name
-        TextView hour = (TextView) gridItemView.findViewById(R.id.hour);
+        final TextView hour = (TextView) gridItemView.findViewById(R.id.hour);
 
         // Displays the day assigned to the GridView item (or the Dates object it is holding)
         hour.setText("" + currentHour.numToString(currentHour.getHour()) + " " + currentHour.getTimeOfDay());
@@ -91,6 +101,21 @@ public class HourAdapter extends ArrayAdapter<Hour> {
         hour.setTextColor(Color.GRAY);
 
         theSelected.clear();
+        for(int h = 0; h < lengthOfList; h++){
+            Hour tempHour = getItem(h);
+            if(tempHour.isClicked()){
+                theSelected.add(tempHour);
+            }
+        }
+
+        if(currentHour.isClicked()){
+            hour.setBackgroundColor(Color.CYAN);
+        }
+        else{
+            hour.setBackgroundColor(Color.LTGRAY);
+        }
+
+        /*theSelected.clear();
         for(int h = 0; h < lengthOfList; h++){
             Hour tempHour = getItem(h);
             if(tempHour.isClicked()){
@@ -133,6 +158,7 @@ public class HourAdapter extends ArrayAdapter<Hour> {
                 //sortTheList(theSelected);
             }
         }
+        */
 
         // Setting an onClickListener on each View performs actions when clicked
         gridItemView.setOnClickListener(new View.OnClickListener(){
@@ -143,6 +169,27 @@ public class HourAdapter extends ArrayAdapter<Hour> {
             @Override
             public void onClick(View v){
                 TextView cur = (TextView) v.findViewById(R.id.hour); // Finds the TextView defined in the list_item layout
+
+                ColorDrawable color = (ColorDrawable)hour.getBackground();
+                int theColor = color.getColor();
+                if(theColor == Color.CYAN){
+                    currentHour.clickTheHour();
+                    numHours = numHours - 1;
+                    hour.setBackgroundColor(Color.LTGRAY);
+                    theSelected.remove(currentHour);
+                    sortTheList(theSelected);
+                    toRemove = currentHour;
+                }
+                else{
+                    currentHour.clickTheHour();
+                    numHours = numHours + 1;
+                    hour.setBackgroundColor(Color.CYAN);
+                    theSelected.add(currentHour);
+                    sortTheList(theSelected);
+                    toAdd = currentHour;
+                }
+
+                /*
                 currentHour.clickTheHour();
                 // If the GridView clicked has been clicked before and is not an empty calendar spot, then the background color
                 // is changed to show that it has been selected and the number of selected days goes up by one.
@@ -163,7 +210,7 @@ public class HourAdapter extends ArrayAdapter<Hour> {
                         //theSelected.remove(currentHour);
                         //sortTheList(theSelected);
                     //}
-                }
+                }*/
 
             }
         });

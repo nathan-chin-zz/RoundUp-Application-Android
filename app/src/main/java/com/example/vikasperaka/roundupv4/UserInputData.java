@@ -78,19 +78,34 @@ public class UserInputData extends AppCompatActivity {
             }
         });
 
+        final ArrayList<ArrayList<Hour>> endData = new ArrayList<>();
+        ArrayList<Dates> temp = getIntent().getParcelableArrayListExtra("sendAgain");
+        int numDays = getIntent().getExtras().getInt("numDays");
+        long startHour = getIntent().getExtras().getLong("startHour");
+        long endHour = getIntent().getExtras().getLong("endHour");
+        String startTime = getIntent().getExtras().getString("startTime");
+        String endTime = getIntent().getExtras().getString("endTime");
+        String increment = getIntent().getExtras().getString("increment");
+        for(int i = 0; i < numDays; i++){
+            temp.get(i).setStartAndEndHours((int)startHour, (int)endHour);
+            temp.get(i).setStartAndEndTimes(startTime, endTime);
+            temp.get(i).makeHoursList((int)startHour, (int)endHour, startTime, endTime, increment);
+            endData.add(temp.get(i).getHours());
+        }
+
         Button finish = (Button) findViewById(R.id.finish);
         finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<ArrayList<Double>> endData = new ArrayList<>();
+                /*
                 for(int i = 0; i < masterList.size(); i++){
-                    endData.add(new ArrayList<Double>());
+                    endData.add(new ArrayList<Hour>());
                     for(int j = 0; j < masterList.get(i).size(); j++){
-                        endData.get(i).add(masterList.get(i).get(j).getHour());
+                        endData.get(i).add(masterList.get(i).get(j));
                     }
-                }
-                //changeToBoolean(endData);
-                Toast.makeText(getApplicationContext(), "" + endData, Toast.LENGTH_SHORT).show();
+                }*/
+                ArrayList<ArrayList<Boolean>> master = changeToBoolean(endData);
+                Toast.makeText(getApplicationContext(), "" + master, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -109,14 +124,17 @@ public class UserInputData extends AppCompatActivity {
     }
     public ArrayList<ArrayList<Boolean>> changeToBoolean(ArrayList<ArrayList<Hour>> input){
         ArrayList<ArrayList<Boolean>> sendToDatabase = new ArrayList<>();
+        int numDays = getIntent().getExtras().getInt("numDays");
+        long startHour = getIntent().getExtras().getLong("startHour");
+        long endHour = getIntent().getExtras().getLong("endHour");
         for(int g = 0; g < input.size(); g++){
             sendToDatabase.add(new ArrayList<Boolean>());
             for(int h = 0; h < input.get(g).size(); h++){
                 if(input.get(g).get(h).isClicked()){
-                    sendToDatabase.get(g).add(true);
+                    sendToDatabase.get(g).add(h, true);
                 }
                 else{
-                    sendToDatabase.get(g).add(false);
+                    sendToDatabase.get(g).add(h, false);
                 }
             }
         }
@@ -158,6 +176,7 @@ public class UserInputData extends AppCompatActivity {
 
         private static final String ARG_SECTION_NUMBER = "section_number";
         private ArrayList<Hour> cumulative = new ArrayList<>();
+        private ArrayList<String> temp3 = new ArrayList<String>();
 
         public PlaceholderFragment() {
         }
@@ -216,21 +235,27 @@ public class UserInputData extends AppCompatActivity {
             myActivity.updateSelected(cumulative, curNum, temp.size());
 
             final TextView textView = (TextView) rootView.findViewById(R.id.num_selected_hours);
+            //updateText(temp2);
+            for(int f = 0; f < cumulative.size(); f++){
+                temp3.add("" + cumulative.get(f).getHour());
+            }
+            textView.setText("Hours chosen: " + temp3);
             textView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View view){
-                    ArrayList<String> temp3 = new ArrayList<String>();
-                    for(int k = 0; k < temp2.size(); k++){
+                    updateText(temp2);
+                    /*for(int k = 0; k < temp2.size(); k++){
+                        temp3.clear();
                             if(temp2.get(k).isClicked()){
                                 temp3.add(temp2.get(k).numToString(temp2.get(k).getHour()));
                             }
-                    }
+                    }*/
             /*for(int j = 0; j < temp2.size(); j++){
                 if(temp2.get(j).isClicked()){
                     temp3.add(temp2.get(j).numToString(temp2.get(j).getHour()));
                 }
             }*/
-                    textView.setText("" + temp3);
+                    textView.setText("Hours chosen: " + temp3);
                 }
             });
 
@@ -238,6 +263,15 @@ public class UserInputData extends AppCompatActivity {
                 //textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
                 //return rootView;
             return rootView;
+        }
+
+        public void updateText(ArrayList<Hour> temp2){
+            temp3.clear();
+            for(int k = 0; k < temp2.size(); k++){
+                if(temp2.get(k).isClicked()){
+                    temp3.add(temp2.get(k).numToString(temp2.get(k).getHour()));
+                }
+            }
         }
     }
 

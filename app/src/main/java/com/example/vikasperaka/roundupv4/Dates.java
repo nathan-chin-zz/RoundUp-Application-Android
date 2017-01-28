@@ -394,6 +394,8 @@ public class Dates extends AppCompatActivity implements Parcelable {
     }
 
     public void makeHoursList(int startHour, int endHour, String startTime, String endTime, String increment){
+        // If the hours or days are changed, the list is made new
+        hours.clear();
         // Check AM PM
         if(startTime.equals("AM") && endTime.equals("PM") && increment.equals("60 min")){
             if(startHour == 12){

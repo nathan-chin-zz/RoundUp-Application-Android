@@ -126,9 +126,9 @@ public class CalendarAdapter extends ArrayAdapter<Dates>{
                 // change its boolean value so it is clicked
 
                 ColorDrawable color = (ColorDrawable)cur.getBackground();
-                int hi = color.getColor();
+                int theColor = color.getColor();
                 if(numDays < 21){
-                    if(hi == Color.CYAN){
+                    if(theColor == Color.CYAN){
                         currentDate.clickTheDay();
                         numDays = numDays - 1;
                         cur.setBackgroundColor(Color.LTGRAY);
@@ -154,7 +154,7 @@ public class CalendarAdapter extends ArrayAdapter<Dates>{
                     }
                 }
                 else{
-                    if(hi == Color.CYAN){
+                    if(theColor == Color.CYAN){
                         currentDate.clickTheDay();
                         numDays = numDays - 1;
                         cur.setBackgroundColor(Color.LTGRAY);
