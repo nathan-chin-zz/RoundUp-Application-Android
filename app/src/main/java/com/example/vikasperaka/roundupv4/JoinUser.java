@@ -73,8 +73,8 @@ public class JoinUser extends AppCompatActivity {
                 DatabaseReference user = subRoot.child(name);
                 //manipulate user database
                 int rand = (int)(Math.random() * 5 + 1);
-                ArrayList<ArrayList<Long>> test = (ArrayList<ArrayList<Long>>) getIntent().getExtras().get("userCal");
-                ArrayList<Long> inner = new ArrayList<Long>();
+                ArrayList<ArrayList<Boolean>> test = (ArrayList<ArrayList<Boolean>>) getIntent().getExtras().get("masterList");
+                /*ArrayList<Long> inner = new ArrayList<Long>();
                 inner.add((long)rand);
                 inner.add((long)0);
                 inner.add((long)0);
@@ -83,7 +83,7 @@ public class JoinUser extends AppCompatActivity {
                 map2.put("userCal", test);
                 user.updateChildren(map2);
                 //user.push().setValue(test); //updating user data accordingly
-                // user.getKey();
+                // user.getKey();*/
 
 
                 Intent i = new Intent(getApplicationContext(), Confirmation.class);

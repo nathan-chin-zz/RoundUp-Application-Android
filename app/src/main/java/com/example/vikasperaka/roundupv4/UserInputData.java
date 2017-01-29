@@ -18,7 +18,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -105,7 +104,14 @@ public class UserInputData extends AppCompatActivity {
                     }
                 }*/
                 ArrayList<ArrayList<Boolean>> master = changeToBoolean(endData);
-                Toast.makeText(getApplicationContext(), "" + master, Toast.LENGTH_SHORT).show();
+                String timeDescription = getIntent().getExtras().getString("timeDescription");
+                String code = getIntent().getExtras().getString("code");
+                Intent complete = new Intent(getApplicationContext(), JoinUser.class);
+                complete.putExtra("timeDescription", timeDescription);
+                complete.putExtra("masterList", master);
+                complete.putExtra("code", code);
+                startActivity(complete);
+                //Toast.makeText(getApplicationContext(), "" + master, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -127,16 +133,17 @@ public class UserInputData extends AppCompatActivity {
         int numDays = getIntent().getExtras().getInt("numDays");
         long startHour = getIntent().getExtras().getLong("startHour");
         long endHour = getIntent().getExtras().getLong("endHour");
-        for(int g = 0; g < input.size(); g++){
+        for(int g = 0; g < input.size(); g++) {
             sendToDatabase.add(new ArrayList<Boolean>());
-            for(int h = 0; h < input.get(g).size(); h++){
-                if(input.get(g).get(h).isClicked()){
-                    sendToDatabase.get(g).add(h, true);
+            for (int h = 0; h < input.get(g).size(); h++) {
+                //if (input.get(g).get(h).isClicked()) {
+                    sendToDatabase.get(g).add(h, input.get(g).get(h).isClicked());
+                    /*sendToDatabase.get(g).add(h, true);
                 }
                 else{
                     sendToDatabase.get(g).add(h, false);
+                }*/
                 }
-            }
         }
         return sendToDatabase;
     }

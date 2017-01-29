@@ -135,7 +135,7 @@ public class CalendarAdapter extends ArrayAdapter<Dates>{
                     }
                     else{
                         if (currentDate.getFontColor() == Color.TRANSPARENT) {
-                            Toast.makeText(getContext(), "Please select a valid day", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getContext(), "Please select a valid day", Toast.LENGTH_SHORT).show();
                         } else if ((currentDate.getDay() < currentDay) && (currentDate.getMonth() == currentMonth)) {
                             Toast.makeText(getContext(), "Please select a valid day", Toast.LENGTH_SHORT).show();
                         } else if(currentDate.getMonth() < currentMonth) {
@@ -161,7 +161,7 @@ public class CalendarAdapter extends ArrayAdapter<Dates>{
                     }
                     else{
                         if (currentDate.getFontColor() == Color.TRANSPARENT) {
-                            Toast.makeText(getContext(), "Please select a valid day", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(getContext(), "Please select a valid day", Toast.LENGTH_SHORT).show();
                         } else if ((currentDate.getDay() < currentDay) && (currentDate.getMonth() == currentMonth)) {
                             Toast.makeText(getContext(), "Please select a valid day", Toast.LENGTH_SHORT).show();
                         } else if(currentDate.getMonth() < currentMonth) {

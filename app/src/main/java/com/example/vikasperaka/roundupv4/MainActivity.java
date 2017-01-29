@@ -11,6 +11,7 @@ public class MainActivity extends AppCompatActivity {
     private Button create;
     private Button join;
     private Button result;
+    private Button help;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         create = (Button)findViewById(R.id.createRoundUp_button);
         join = (Button)findViewById(R.id.joinRoundUp_button);
         result = (Button)findViewById(R.id.results_button);
+        help = (Button)findViewById(R.id.help_button);
 
         //options to create, join, and see results
         create.setOnClickListener(new View.OnClickListener() {
@@ -42,5 +44,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Results.class));
             }
         });
+
+        help.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                //startActivity(new Intent(getApplicationContext(), ));
+            }
+        });
+
     }
 }

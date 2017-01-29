@@ -5,33 +5,32 @@
     android:id="@+id/activity_join_user"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
     android:orientation="vertical"
+    android:gravity="center"
+    android:layout_marginLeft="20dp"
+    android:layout_marginRight="20dp"
     tools:context="com.example.vikasperaka.roundupv4.JoinUser">
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Enter Name"
-        android:ems="10"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-
+        android:hint="Enter Name"
+        android:maxLength="50"
+        android:maxLines="1"
         android:id="@+id/joinName" />
 
-
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Comments"
+        android:maxLength="200"
+        android:maxLines="4"
+        android:id="@+id/comments"/>
 
     <Button
         android:text="Send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/joinName"
-        android:layout_alignRight="@+id/joinName"
-        android:layout_alignEnd="@+id/joinName"
-        android:layout_marginRight="42dp"
-        android:layout_marginEnd="42dp"
-        android:layout_marginTop="157dp"
         android:id="@+id/sendResults" />
 </LinearLayout>
